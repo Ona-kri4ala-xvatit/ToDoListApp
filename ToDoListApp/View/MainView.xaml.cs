@@ -11,19 +11,34 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ToDoListApp.ViewModel;
 
 namespace ToDoListApp.View
 {
     public partial class MainView : Window
     {
+        private MainViewModel viewModel;
+        
         public MainView()
         {
             InitializeComponent();
+            viewModel = new MainViewModel();
+            DataContext = viewModel;
         }
 
-        private void DragWindow(object sender, MouseButtonEventArgs e)
+        private void DragMainView(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
+        }
+
+        private void AddTaskForm(object sender, RoutedEventArgs e)
+        {
+            viewModel.OpenSecondForm();
+        }
+
+        private void CloseForm(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

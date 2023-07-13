@@ -3,10 +3,40 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ToDoListApp.View"
+        xmlns:local="clr-namespace:ToDoListApp.View" xmlns:viewmodel="clr-namespace:ToDoListApp.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
         mc:Ignorable="d"
-        Title="MainView" Height="700" Width="900" WindowStartupLocation="CenterScreen"  WindowStyle="None" FontSize="20" MouseLeftButtonDown="DragWindow" > 
+        Title="MainView" Height="700" Width="900" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" FontSize="20" MouseLeftButtonDown="DragMainView">
     <Grid>
-        <ListBox Margin="5"></ListBox>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <Button Content="Add Task" Height="50" Margin="0,0,455,0" Grid.Row="1" Click="AddTaskForm"/>
+        <Button Content="Delete Task" Height="50" Margin="450,0,0,0" Grid.Row="1"/>
+
+        <ListBox ItemsSource="{Binding TasksCollection}" Margin="2,35,0,0">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock FontSize="40" Text="{Binding Title}" />
+                        <TextBlock Text="{Binding Description}"/>
+                        <TextBlock Text="{Binding Deadline}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Menu HorizontalAlignment="Left" VerticalAlignment="Top">
+            <MenuItem>
+                <MenuItem.Header>
+                    <TextBlock Text="&#xE712;" FontFamily="Segoe MDL2 Assets" FontSize="30"/>
+                </MenuItem.Header>
+                <!--<MenuItem Header="Изменить"/>-->
+                <!--<MenuItem Header="Удалить"/> -->
+                <!--<Separator/>-->
+                <MenuItem Header="Close" FontSize="20" Click="CloseForm"/>
+            </MenuItem>
+        </Menu>
     </Grid>
 </Window>
