@@ -17,24 +17,27 @@ namespace ToDoListApp.ViewModel
         
         private string? taskTitle;
         private string? taskDescription;
-        private bool taskIsComplited;
+        private bool taskIsDone;
         private DateTime taskDeadline = DateTime.Now;
 
         public string? TaskTitle { get => taskTitle; set => OnPropertyChanged(out taskTitle, value); }
         public string? TaskDescription { get => taskDescription; set => OnPropertyChanged(out taskDescription, value); }
         public DateTime TaskDeadline { get => taskDeadline; set => OnPropertyChanged(out taskDeadline, value); }
-        public bool TaskIsComplited { get => taskIsComplited; set => OnPropertyChanged(out taskIsComplited, value); }
+        public bool TaskIsDone { get => taskIsDone; set => OnPropertyChanged(out taskIsDone, value); }
 
-       
-
-        public AddToDoTaskViewModel() { }
+        public AddToDoTaskViewModel() {}
         public AddToDoTaskViewModel(ObservableCollection<ToDoTask>? taskColection)
         {
             this.taskColection = taskColection;
         }
+        public void Clear()
+        {
+            TaskTitle = string.Empty;
+            TaskDescription = string.Empty;
+            TaskDeadline = DateTime.Now;
+            TaskIsDone = false;
+        }
         
-        
-
         public void AddTask()
         {
             taskColection?.Add(new ToDoTask
@@ -42,21 +45,10 @@ namespace ToDoListApp.ViewModel
                 Title = TaskTitle,
                 Description = TaskDescription,
                 Deadline = TaskDeadline,
-                IsCompleted = TaskIsComplited
+                IsDone = TaskIsDone
             });
 
             Clear();
         }
-
-        public void Clear()
-        {
-            TaskTitle = string.Empty;
-            TaskDescription = string.Empty;
-            TaskDeadline = DateTime.Now;
-            TaskIsComplited = false;
-        }
-
-
-        
     }
 }

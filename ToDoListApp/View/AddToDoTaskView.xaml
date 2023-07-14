@@ -16,10 +16,10 @@
             <TextBlock Text="Task Title:"/>
             <TextBox Text="{Binding TaskTitle}"/>
             <TextBlock Text="Task Description:"/>
-                <TextBox Text="{Binding TaskDescription}" Height="100" TextWrapping="Wrap"/>
-                <TextBlock Text="Deadline:"/>
-            <DatePicker SelectedDate="{Binding TaskDeadline, StringFormat=Deadline: {0:dd/MM/yyyy}}"/>
-            <CheckBox VerticalContentAlignment="Center" Content="Task done" IsChecked="{Binding TaskIsComplited}"/>
+            <TextBox Text="{Binding TaskDescription}" Height="100" TextWrapping="Wrap"/>
+            <TextBlock Text="Deadline:"/>
+            <DatePicker SelectedDate="{Binding TaskDeadline}"/>
+            <CheckBox  IsChecked="{Binding TaskIsDone}" VerticalContentAlignment="Center" Content="Task done"/>
         </StackPanel>
 
         <Button Content="Cancel" Height="50" Margin="450,0,0,0" Grid.Row="1" Click="CancelButton"/>

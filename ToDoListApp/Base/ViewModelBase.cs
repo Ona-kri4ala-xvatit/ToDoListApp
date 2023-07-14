@@ -7,7 +7,7 @@ namespace ToDoListApp.Base
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public void OnPropertyChanged<T>(out T prop, T value, [CallerMemberName] string? propName = null)
+        protected void OnPropertyChanged<T>(out T prop, T value, [CallerMemberName] string? propName = null)
         {
             prop = value;
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));

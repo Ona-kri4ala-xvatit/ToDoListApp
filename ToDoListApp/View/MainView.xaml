@@ -6,35 +6,41 @@
         xmlns:local="clr-namespace:ToDoListApp.View" xmlns:viewmodel="clr-namespace:ToDoListApp.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
         mc:Ignorable="d"
         Title="MainView" Height="700" Width="900" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" FontSize="20" MouseLeftButtonDown="DragMainView">
+
+    <Window.Resources>
+        <Style x:Key="taskListItemStyle" TargetType="TextBlock">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsDone}" Value="True">
+                    <Setter Property="Foreground" Value="Green"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsDone}" Value="False">
+                    <Setter Property="Foreground" Value="Red"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <DataTemplate x:Key="tasksListTemplate">
+            <StackPanel>
+                <TextBlock Text="{Binding Title}" Style="{StaticResource taskListItemStyle}"/>
+                <TextBlock Text="{Binding Description}" FontSize="30" TextWrapping="Wrap" Style="{StaticResource taskListItemStyle}"/>
+                <TextBlock Text="{Binding Deadline, StringFormat=Deadline: {0:dd/MM/yyyy}}"/>
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
+    
     <Grid>
-        <ListBox ItemsSource="{Binding TasksCollection}" Margin="2,35,0,2">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <TextBlock FontSize="40" Text="{Binding Title}" />
-                        <TextBlock Text="{Binding Description}"/>
-                        <TextBlock Text="{Binding Deadline}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <ListBox ItemsSource="{Binding TasksCollection}" Margin="2,35,0,2" FontFamily="Ariel" ItemTemplate="{StaticResource tasksListTemplate}"/>
 
         <Menu HorizontalAlignment="Left" VerticalAlignment="Top">
             <MenuItem>
                 <MenuItem.Header>
                     <TextBlock Text="&#xE712;" FontFamily="Segoe MDL2 Assets" FontSize="30"/>
                 </MenuItem.Header>
-                <!--<MenuItem Header="Изменить"/>-->
-                <!--<MenuItem Header="Удалить"/> -->
-                <!--<Separator/>-->
                 <MenuItem Header="Close" FontSize="25" Click="CloseForm"/>
             </MenuItem>
 
             <MenuItem Header="Add Task" FontSize="25" FontFamily="Arial" Click="AddTaskForm"/>
             <MenuItem Header="Delete Task" FontSize="25" FontFamily="Arial"/>
-
         </Menu>
-        
-        
     </Grid>
 </Window>
