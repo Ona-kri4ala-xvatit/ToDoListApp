@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using ToDoListApp.Base;
 using ToDoListApp.Model;
 using ToDoListApp.View;
@@ -14,8 +8,10 @@ namespace ToDoListApp.ViewModel
     public class MainViewModel : ViewModelBase
     {
         private AddToDoTaskView addTaskView;
+        private ToDoTask selectedTask;
+
+        public ToDoTask SelectedTask { get => selectedTask; set => OnPropertyChanged(out selectedTask, value); }
         public ObservableCollection<ToDoTask> TasksCollection { get; set; }
-        public ObservableCollection<ToDoTask> tttasksCollection;
         public MainViewModel()
         {
 
@@ -28,11 +24,11 @@ namespace ToDoListApp.ViewModel
             addTaskView.ShowDialog();
         }
 
-        public void RemoveTask(int index)
+        public void RemoveTask()
         {
-            if (TasksCollection.Count != 0 && index != -1)
+            if (SelectedTask != null)
             {
-                TasksCollection.RemoveAt(index);
+                TasksCollection.Remove(selectedTask);
             }
         }
     }

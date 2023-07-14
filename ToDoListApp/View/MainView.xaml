@@ -22,14 +22,19 @@
         <DataTemplate x:Key="tasksListTemplate">
             <StackPanel>
                 <TextBlock Text="{Binding Title}" Style="{StaticResource taskListItemStyle}"/>
-                <TextBlock Text="{Binding Description}" FontSize="30" TextWrapping="Wrap" Style="{StaticResource taskListItemStyle}"/>
+                <TextBlock Text="{Binding Description}" FontSize="30" TextWrapping="Wrap" 
+                           Style="{StaticResource taskListItemStyle}"/>
                 <TextBlock Text="{Binding Deadline, StringFormat=Deadline: {0:dd/MM/yyyy}}"/>
             </StackPanel>
         </DataTemplate>
     </Window.Resources>
     
     <Grid>
-        <ListBox x:Name="listBoxTasks" ItemsSource="{Binding TasksCollection}" Margin="2,35,0,2" FontFamily="Ariel" ItemTemplate="{StaticResource tasksListTemplate}"/>
+        <ListBox SelectedItem="{Binding SelectedTask}" 
+                 ItemsSource="{Binding TasksCollection}" 
+                 ItemTemplate="{StaticResource tasksListTemplate}"
+                 Margin="2,35,0,2" 
+                 FontFamily="Ariel"/>
 
         <Menu HorizontalAlignment="Left" VerticalAlignment="Top">
             <MenuItem>

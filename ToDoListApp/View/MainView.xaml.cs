@@ -43,7 +43,7 @@ namespace ToDoListApp.View
 
         private void RemoveTask_Click(object sender, RoutedEventArgs e)
         {
-            viewModel.RemoveTask(listBoxTasks.SelectedIndex);
+            viewModel.RemoveTask();
         }
     }
 }
