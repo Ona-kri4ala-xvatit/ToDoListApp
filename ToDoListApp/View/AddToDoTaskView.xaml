@@ -21,8 +21,8 @@
             <DatePicker SelectedDate="{Binding TaskDeadline, StringFormat=Deadline: {0:dd/MM/yyyy}}"/>
             <CheckBox VerticalContentAlignment="Center" Content="Task done" IsChecked="{Binding TaskIsComplited}"/>
         </StackPanel>
-        
-        <Button Content="Cancel" Height="50" Margin="0,0,450,0" Grid.Row="1" Click="CancelButton"/>
-        <Button Content="Add" Height="50" Margin="450,0,0,0" Grid.Row="1" Click="AddButton"/>
+
+        <Button Content="Cancel" Height="50" Margin="450,0,0,0" Grid.Row="1" Click="CancelButton"/>
+        <Button Content="Add" Height="50" Margin="0,0,450,0" Grid.Row="1" Click="AddButton"/>
     </Grid>
 </Window>

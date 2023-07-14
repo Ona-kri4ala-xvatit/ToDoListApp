@@ -7,15 +7,7 @@
         mc:Ignorable="d"
         Title="MainView" Height="700" Width="900" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" FontSize="20" MouseLeftButtonDown="DragMainView">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="50"/>
-        </Grid.RowDefinitions>
-
-        <Button Content="Add Task" Height="50" Margin="0,0,455,0" Grid.Row="1" Click="AddTaskForm"/>
-        <Button Content="Delete Task" Height="50" Margin="450,0,0,0" Grid.Row="1"/>
-
-        <ListBox ItemsSource="{Binding TasksCollection}" Margin="2,35,0,0">
+        <ListBox ItemsSource="{Binding TasksCollection}" Margin="2,35,0,2">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -35,8 +27,14 @@
                 <!--<MenuItem Header="Изменить"/>-->
                 <!--<MenuItem Header="Удалить"/> -->
                 <!--<Separator/>-->
-                <MenuItem Header="Close" FontSize="20" Click="CloseForm"/>
+                <MenuItem Header="Close" FontSize="25" Click="CloseForm"/>
             </MenuItem>
+
+            <MenuItem Header="Add Task" FontSize="25" FontFamily="Arial" Click="AddTaskForm"/>
+            <MenuItem Header="Delete Task" FontSize="25" FontFamily="Arial"/>
+
         </Menu>
+        
+        
     </Grid>
 </Window>

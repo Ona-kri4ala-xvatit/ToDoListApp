@@ -6,42 +6,38 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using ToDoListApp.Base;
 using ToDoListApp.Model;
 
 namespace ToDoListApp.ViewModel
 {
-    public class AddToDoTaskViewModel : INotifyPropertyChanged
+    public class AddToDoTaskViewModel : ViewModelBase
     { 
-        private string taskTitle;
-        private string taskDescription;
+        private readonly ObservableCollection<ToDoTask>? taskColection;
+        
+        private string? taskTitle;
+        private string? taskDescription;
         private bool taskIsComplited;
-        private DateTime taskDeadline;
+        private DateTime taskDeadline = DateTime.Now;
 
-        public string TaskTitle { get => taskTitle; set => OnPropertyChanged(out taskTitle, value); }
-        public string TaskDescription { get => taskDescription; set => OnPropertyChanged(out taskDescription, value); }
+        public string? TaskTitle { get => taskTitle; set => OnPropertyChanged(out taskTitle, value); }
+        public string? TaskDescription { get => taskDescription; set => OnPropertyChanged(out taskDescription, value); }
         public DateTime TaskDeadline { get => taskDeadline; set => OnPropertyChanged(out taskDeadline, value); }
         public bool TaskIsComplited { get => taskIsComplited; set => OnPropertyChanged(out taskIsComplited, value); }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-        private ToDoTask ToDoTaskModel = new ToDoTask();
+       
 
-        private readonly ObservableCollection<ToDoTask>? taskColection;
         public AddToDoTaskViewModel() { }
         public AddToDoTaskViewModel(ObservableCollection<ToDoTask>? taskColection)
         {
             this.taskColection = taskColection;
-            
         }
         
-        public void OnPropertyChanged<T>(out T prop, T value, [CallerMemberName] string? propName = null)
-        {
-            prop = value;
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
-        }
+        
 
         public void AddTask()
         {
-            taskColection.Add(new ToDoTask
+            taskColection?.Add(new ToDoTask
             {
                 Title = TaskTitle,
                 Description = TaskDescription,
@@ -49,7 +45,17 @@ namespace ToDoListApp.ViewModel
                 IsCompleted = TaskIsComplited
             });
 
+            Clear();
         }
+
+        public void Clear()
+        {
+            TaskTitle = string.Empty;
+            TaskDescription = string.Empty;
+            TaskDeadline = DateTime.Now;
+            TaskIsComplited = false;
+        }
+
 
         
     }

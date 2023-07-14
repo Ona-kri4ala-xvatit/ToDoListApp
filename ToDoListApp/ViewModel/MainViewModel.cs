@@ -10,18 +10,15 @@ using ToDoListApp.View;
 
 namespace ToDoListApp.ViewModel
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel 
     {
-        //public ToDoTask? ToDoTask { get; set; }
         private AddToDoTaskView addTaskView;
-        public AddToDoTaskViewModel? addTaskViewModel;
         public ObservableCollection<ToDoTask> TasksCollection { get; set; }
         public MainViewModel()
         {
+
             TasksCollection = new ObservableCollection<ToDoTask>();
         }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
 
         public void OpenSecondForm()
         {

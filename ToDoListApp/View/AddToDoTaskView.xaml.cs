@@ -37,6 +37,7 @@ namespace ToDoListApp.View
         private void AddButton(object sender, RoutedEventArgs e)
         {
             viewModel.AddTask();
+            this.Close();
         }
 
         private void CancelButton(object sender, RoutedEventArgs e)
