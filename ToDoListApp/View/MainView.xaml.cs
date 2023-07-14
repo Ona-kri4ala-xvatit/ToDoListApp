@@ -31,7 +31,7 @@ namespace ToDoListApp.View
             this.DragMove();
         }
 
-        private void AddTaskForm(object sender, RoutedEventArgs e)
+        private void OpenAddTaskForm(object sender, RoutedEventArgs e)
         {
             viewModel.OpenSecondForm();
         }
@@ -39,6 +39,11 @@ namespace ToDoListApp.View
         private void CloseForm(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void RemoveTask_Click(object sender, RoutedEventArgs e)
+        {
+            viewModel.RemoveTask(listBoxTasks.SelectedIndex);
         }
     }
 }

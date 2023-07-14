@@ -29,7 +29,7 @@
     </Window.Resources>
     
     <Grid>
-        <ListBox ItemsSource="{Binding TasksCollection}" Margin="2,35,0,2" FontFamily="Ariel" ItemTemplate="{StaticResource tasksListTemplate}"/>
+        <ListBox x:Name="listBoxTasks" ItemsSource="{Binding TasksCollection}" Margin="2,35,0,2" FontFamily="Ariel" ItemTemplate="{StaticResource tasksListTemplate}"/>
 
         <Menu HorizontalAlignment="Left" VerticalAlignment="Top">
             <MenuItem>
@@ -39,8 +39,8 @@
                 <MenuItem Header="Close" FontSize="25" Click="CloseForm"/>
             </MenuItem>
 
-            <MenuItem Header="Add Task" FontSize="25" FontFamily="Arial" Click="AddTaskForm"/>
-            <MenuItem Header="Delete Task" FontSize="25" FontFamily="Arial"/>
+            <MenuItem Header="Add Task" FontSize="25" FontFamily="Arial" Click="OpenAddTaskForm"/>
+            <MenuItem Header="Delete Task" FontSize="25" FontFamily="Arial" Click="RemoveTask_Click"/>
         </Menu>
     </Grid>
 </Window>
