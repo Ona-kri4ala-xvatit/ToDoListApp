@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Windows;
+using System.Windows.Data;
 using ToDoListApp.Base;
 using ToDoListApp.Interfaces;
 using ToDoListApp.Model;
@@ -12,25 +15,18 @@ namespace ToDoListApp.ViewModel
 {
     public class MainViewModel : ViewModelBase, IFileService
     {
-        private AddToDoTaskView addTaskView;
-        private ToDoTask selectedTask;
+        private AddToDoTaskView? addTaskView;
+        private ToDoTask? selectedTask;
 
-        public ToDoTask SelectedTask { get => selectedTask; set => OnPropertyChanged(out selectedTask, value); }
+        public ToDoTask? SelectedTask { get => selectedTask; set => OnPropertyChanged(out selectedTask, value); }
         public ObservableCollection<ToDoTask> TasksCollection { get; set; }
 
-        private static string filePath = "tasks.json";
+        private static string jsonFilePath = "tasks.json";
 
         public MainViewModel()
         {
             var tasks = LoadTasks();
-            if (tasks == null)
-            {
-                TasksCollection = new ObservableCollection<ToDoTask>();
-            }
-            else
-            {
-                TasksCollection = new ObservableCollection<ToDoTask>(tasks);
-            }
+            TasksCollection = new ObservableCollection<ToDoTask>(tasks);           
         }
 
         public void OpenSecondForm()
@@ -41,28 +37,25 @@ namespace ToDoListApp.ViewModel
 
         public void RemoveTask()
         {
-            if (SelectedTask != null)
-            {
-                TasksCollection.Remove(selectedTask);
-            }
+            TasksCollection?.Remove(selectedTask!);
         }
 
         public IEnumerable<ToDoTask> LoadTasks()
         {
-            if (File.Exists(filePath))
+            if (!File.Exists(jsonFilePath))
             {
-                var json = File.ReadAllText(filePath);
-                var tasks = JsonSerializer.Deserialize<IEnumerable<ToDoTask>>(json);
-                return tasks;
+                return Enumerable.Empty<ToDoTask>();
             }
 
-            return Enumerable.Empty<ToDoTask>();    
+            var json = File.ReadAllText(jsonFilePath);
+            var tasks = JsonSerializer.Deserialize<IEnumerable<ToDoTask>>(json);
+            return tasks!;
         }
 
         public void SaveTasks()
         {
             var json = JsonSerializer.Serialize(TasksCollection);
-            File.WriteAllText(filePath, json);
+            File.WriteAllText(jsonFilePath, json);
         }
     }
 }
