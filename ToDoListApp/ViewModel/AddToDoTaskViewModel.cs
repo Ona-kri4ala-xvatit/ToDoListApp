@@ -1,20 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using ToDoListApp.Base;
 using ToDoListApp.Model;
 
 namespace ToDoListApp.ViewModel
 {
     public class AddToDoTaskViewModel : ViewModelBase
-    { 
+    {
         private readonly ObservableCollection<ToDoTask>? taskColection;
-        
+
         private string? taskTitle;
         private string? taskDescription;
         private bool taskIsDone;
@@ -25,7 +19,7 @@ namespace ToDoListApp.ViewModel
         public DateTime TaskDeadline { get => taskDeadline; set => OnPropertyChanged(out taskDeadline, value); }
         public bool TaskIsDone { get => taskIsDone; set => OnPropertyChanged(out taskIsDone, value); }
 
-        public AddToDoTaskViewModel() {}
+        public AddToDoTaskViewModel() { }
         public AddToDoTaskViewModel(ObservableCollection<ToDoTask>? taskColection)
         {
             this.taskColection = taskColection;
@@ -37,7 +31,7 @@ namespace ToDoListApp.ViewModel
             TaskDeadline = DateTime.Now;
             TaskIsDone = false;
         }
-        
+
         public void AddTask()
         {
             taskColection?.Add(new ToDoTask

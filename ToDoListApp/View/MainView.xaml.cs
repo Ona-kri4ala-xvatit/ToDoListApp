@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using ToDoListApp.ViewModel;
 
 namespace ToDoListApp.View
@@ -18,7 +8,7 @@ namespace ToDoListApp.View
     public partial class MainView : Window
     {
         private MainViewModel viewModel;
-        
+
         public MainView()
         {
             InitializeComponent();
@@ -44,6 +34,18 @@ namespace ToDoListApp.View
         private void RemoveTask_Click(object sender, RoutedEventArgs e)
         {
             viewModel.RemoveTask();
+        }
+
+        private void LoadTasks_Click(object sender, RoutedEventArgs e)
+        {
+            viewModel.LoadTasks();
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
+
+            viewModel.SaveTasks();
         }
     }
 }
