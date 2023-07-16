@@ -34,6 +34,7 @@ namespace ToDoListApp.ViewModel
 
         public void AddTask()
         {
+            if (TaskTitle == null && TaskDescription == null) { return; }
             taskColection?.Add(new ToDoTask
             {
                 Title = TaskTitle,

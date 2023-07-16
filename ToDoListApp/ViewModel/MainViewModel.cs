@@ -4,8 +4,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
-using System.Windows;
-using System.Windows.Data;
+using System.Windows.Controls;
 using ToDoListApp.Base;
 using ToDoListApp.Interfaces;
 using ToDoListApp.Model;
@@ -21,15 +20,15 @@ namespace ToDoListApp.ViewModel
         public ToDoTask? SelectedTask { get => selectedTask; set => OnPropertyChanged(out selectedTask, value); }
         public ObservableCollection<ToDoTask> TasksCollection { get; set; }
 
-        private static string jsonFilePath = "tasks.json";
+        private const string jsonFilePath = "tasks.json";
 
         public MainViewModel()
         {
             var tasks = LoadTasks();
-            TasksCollection = new ObservableCollection<ToDoTask>(tasks);           
+            TasksCollection = new ObservableCollection<ToDoTask>(tasks);
         }
 
-        public void OpenSecondForm()
+        public void OpenAddTaskView()
         {
             addTaskView = new AddToDoTaskView(TasksCollection);
             addTaskView.ShowDialog();
@@ -56,6 +55,15 @@ namespace ToDoListApp.ViewModel
         {
             var json = JsonSerializer.Serialize(TasksCollection);
             File.WriteAllText(jsonFilePath, json);
+        }
+
+        public void SortTasks(ListBox listBox)
+        {
+            if (TasksCollection.Count != 0)
+            {
+                ICollectionView listBoxView = listBox.Items;              
+                listBoxView.SortDescriptions.Add(new SortDescription(nameof(ToDoTask.IsDone), ListSortDirection.Descending));
+            }
         }
     }
 }

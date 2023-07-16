@@ -8,7 +8,6 @@ namespace ToDoListApp.View
     public partial class MainView : Window
     {
         private MainViewModel viewModel;
-
         public MainView()
         {
             InitializeComponent();
@@ -21,9 +20,9 @@ namespace ToDoListApp.View
             this.DragMove();
         }
 
-        private void OpenAddTaskForm(object sender, RoutedEventArgs e)
+        private void OpenAddTaskView_Click(object sender, RoutedEventArgs e)
         {
-            viewModel.OpenSecondForm();
+            viewModel.OpenAddTaskView();
         }
 
         private void CloseForm(object sender, RoutedEventArgs e)
@@ -46,6 +45,11 @@ namespace ToDoListApp.View
             base.OnClosing(e);
 
             viewModel.SaveTasks();
+        }
+
+        private void SortTasks_Click(object sender, RoutedEventArgs e)
+        {
+            viewModel.SortTasks(listBox);
         }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ToDoListApp.View" xmlns:viewmodel="clr-namespace:ToDoListApp.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
         mc:Ignorable="d"
-        Title="MainView" Height="700" Width="900" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" FontSize="20" MouseLeftButtonDown="DragMainView" Loaded="LoadTasks_Click">
+        Title="MainView" Height="700" Width="900" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" FontSize="15" MouseLeftButtonDown="DragMainView" Loaded="LoadTasks_Click">
 
     <Window.Resources>
         <Style x:Key="taskListItemStyle" TargetType="TextBlock">
@@ -24,27 +24,36 @@
                 <TextBlock Text="{Binding Title}" Style="{StaticResource taskListItemStyle}"/>
                 <TextBlock Text="{Binding Description}" FontSize="30" TextWrapping="Wrap" 
                            Style="{StaticResource taskListItemStyle}"/>
-                <TextBlock Text="{Binding Deadline, StringFormat=Deadline: {0:dd/MM/yyyy}}"/>
+                <TextBlock Text="{Binding Deadline, StringFormat=Deadline: {0:dd/MM/yyyy HH:mm}}"/>
             </StackPanel>
         </DataTemplate>
     </Window.Resources>
-    
+
     <Grid>
-        <ListBox SelectedItem="{Binding SelectedTask}" 
+        <ListBox x:Name="listBox"
+                 SelectedItem="{Binding SelectedTask}" 
                  ItemsSource="{Binding TasksCollection}" 
                  ItemTemplate="{StaticResource tasksListTemplate}"
                  Margin="2,35,0,2" 
                  FontFamily="Ariel"/>
 
-        <Menu HorizontalAlignment="Left" VerticalAlignment="Top">
+        <Menu VerticalAlignment="Top" Background="#FF3A3A3A" Foreground="White">
             <MenuItem>
                 <MenuItem.Header>
                     <TextBlock Text="&#xE712;" FontFamily="Segoe MDL2 Assets" FontSize="30"/>
                 </MenuItem.Header>
-                <MenuItem Header="Close" FontSize="25" Click="CloseForm"/>
+                <MenuItem Header="Sort Tasks" ToolTip="Show completed tasks first" FontSize="25" FontFamily="Arial" Click="SortTasks_Click" Foreground="Black"/>
+                <Separator/>
+                <MenuItem Header="Close" FontSize="25" Click="CloseForm" Foreground="Black"/>
             </MenuItem>
-            <MenuItem Header="Add Task" FontSize="25" FontFamily="Arial" Click="OpenAddTaskForm"/>
+            <Separator/>
+            <MenuItem Header="Add Task" FontSize="25" FontFamily="Arial" Click="OpenAddTaskView_Click"/>
+            <Separator/>
             <MenuItem Header="Delete Task" FontSize="25" FontFamily="Arial" Click="RemoveTask_Click"/>
+        </Menu>
+
+        <Menu VerticalAlignment="Top" HorizontalAlignment="Right" Background="#FF3A3A3A" Foreground="White">
+            <MenuItem Header="X" FontSize="25" FontFamily="Arial" Click="CloseForm"/>
         </Menu>
     </Grid>
 </Window>
